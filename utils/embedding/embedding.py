@@ -1,5 +1,9 @@
-from utils.data import EmbeddingDataBase, EmbeddingDataClass
-from utils.config import ASCENDING_RANK_METRICS, DESCENDING_RANK_METRICS
+try:
+    from utils.data import EmbeddingDataBase, EmbeddingDataClass
+    from utils.config import ASCENDING_RANK_METRICS, DESCENDING_RANK_METRICS
+except:
+    from FaceX.utils.data import EmbeddingDataBase, EmbeddingDataClass
+    from FaceX.utils.config import ASCENDING_RANK_METRICS, DESCENDING_RANK_METRICS
 
 from typing import List, Dict, Union
 import os
