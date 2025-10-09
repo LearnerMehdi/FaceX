@@ -3,11 +3,11 @@ import cv2
 import numpy as np
 # from deepface.modules.representation import represent
 
-from utils.embedding import build_embedding_gallery, query_embedding_gallery, get_embedding
-from utils.data import EmbeddingDataBase, EmbeddingDataClass
-from utils.config import MAX_AGE, MIN_HITS, IOU_THRESHOLD
-from utils.representation import represent
-from utils.data import SortV2
+from FaceX.utils.embedding import build_embedding_gallery, query_embedding_gallery, get_embedding
+from FaceX.utils.data import EmbeddingDataBase, EmbeddingDataClass
+from FaceX.utils.config import MAX_AGE, MIN_HITS, IOU_THRESHOLD
+from FaceX.utils.representation import represent
+from FaceX.utils.data import SortV2
 
 def process_frame(frame):
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)

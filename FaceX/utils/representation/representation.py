@@ -7,10 +7,11 @@ import numpy as np
 
 # project dependencies
 from deepface.commons import image_utils
-from deepface.modules import modeling, detection, preprocessing
+from deepface.modules import modeling, preprocessing
 from deepface.models.FacialRecognition import FacialRecognition
 
-from utils.data import SortV2
+from FaceX.utils.detection import extract_faces
+from FaceX.utils.data import SortV2
 
 def _format_batch_for_tracker(batch_regions, batch_confidences):
     dets = []
@@ -64,28 +65,16 @@ def represent(
     )
     
     # Extract faces from image
-    if detector_backend != "skip":
-        img_objs = detection.extract_faces(
-            img_path=img_path,
-            detector_backend=detector_backend,
-            grayscale=False,
-            enforce_detection=enforce_detection,
-            align=align,
-            expand_percentage=expand_percentage,
-            anti_spoofing=anti_spoofing,
-            max_faces=max_faces,
-        )
-    else:
-        # Skip detection - use full image
-        img, _ = image_utils.load_image(img_path)
-        if len(img.shape) != 3:
-            raise ValueError(f"Input img must be 3 dimensional but it is {img.shape}")
-        img = img[:, :, ::-1]  # Convert to RGB
-        img_objs = [{
-            "face": img,
-            "facial_area": {"x": 0, "y": 0, "w": img.shape[1], "h": img.shape[0]},
-            "confidence": 0,
-        }]
+    img_objs = extract_faces(
+        img_path=img_path,
+        detector_backend=detector_backend,
+        grayscale=False,
+        enforce_detection=enforce_detection,
+        align=align,
+        expand_percentage=expand_percentage,
+        anti_spoofing=anti_spoofing,
+        max_faces=max_faces,
+    )
 
     if not img_objs:
         return {

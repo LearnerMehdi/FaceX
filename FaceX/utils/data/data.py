@@ -2,6 +2,8 @@ from typing import List
 from dataclasses import dataclass
 import numpy as np
 
+from FaceX.sort.sort import Sort
+
 @dataclass
 class EmbeddingDataClass:
     identity: str
@@ -14,7 +16,6 @@ class EmbeddingDataBase:
     def append(self, data_class: EmbeddingDataClass) -> None:
         self.data.append(data_class)
 
-from sort.sort import Sort
 
 class SortV2(Sort):
     def __init__(self, max_age=1, min_hits=3, iou_threshold=0.3):
